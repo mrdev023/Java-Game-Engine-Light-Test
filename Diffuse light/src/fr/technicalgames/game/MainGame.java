@@ -13,7 +13,7 @@ public class MainGame extends Game{
 	public void init() {
 		
 	    lights.add(new SpotLight(new Vector3f(-4,0,10),new Vector3f(2,2,2),0.1f,0.0f,15.0f,new Vector3f(0,0,-1)));
-	    lights.add(new DirectionalLight(new Vector3f(4,0,-10), new Vector3f(0.4f,0.3f,0.1f), 0.06f));
+	    lights.add(new DirectionalLight(new Vector3f(4,5,-10), new Vector3f(0.4f,0.3f,0.1f), 0.06f));
 	    
 	    
 	    Asset as = new Asset();
@@ -30,6 +30,9 @@ public class MainGame extends Game{
 	    assets.add(as);
 	    as = new Asset();
 	    as.transform = (new Matrix4f()).tranlate(-6,0,0).scale(2,1,0.8f);
+	    assets.add(as);
+	    as = new Asset();
+	    as.transform = (new Matrix4f()).tranlate(-9, -10, -1).scale(20, .5f, 20);
 	    assets.add(as);
 	    as = null;
 	}
@@ -66,6 +69,9 @@ public class MainGame extends Game{
 		for(Asset a : assets){
 	    	a.destroy();
 	    }
+		for(Light l : lights){
+			l.destroy();
+		}
 	}
 
 }

@@ -1,7 +1,8 @@
 package fr.technicalgames.light;
 import fr.technicalgames.math.*;
+import fr.technicalgames.shadow.*;
 
-public abstract class Light {
+public abstract class Light extends Shadow{
 
 	public Vector4f position;//w == 0 si c une directional light
 	public Vector3f intensities;
@@ -11,6 +12,7 @@ public abstract class Light {
     public Vector3f  coneDirection;
     
     public Light(Vector4f position,Vector3f intensities,float attenuation,float ambientCoefficient,float coneAngle,Vector3f coneDirection){
+    	super();
     	this.position = position;
     	this.intensities = intensities;
     	this.attenuation = attenuation;

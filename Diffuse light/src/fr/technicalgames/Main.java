@@ -1,4 +1,7 @@
 package fr.technicalgames;
+
+//http://www.tomdalling.com/blog/modern-opengl/08-even-more-lighting-directional-lights-spotlights-multiple-lights/
+
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -6,6 +9,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 
+import fr.technicalgames.audio.*;
 import fr.technicalgames.game.*;
 import fr.technicalgames.input.*;
 import fr.technicalgames.math.*;
@@ -56,6 +60,11 @@ public class Main {
 	    System.out.println("GLSL Shader Version :" + glGetString(GL20.GL_SHADING_LANGUAGE_VERSION));
 	    //------------------------------------------------------------------------------------
 		
+	    //Creation du device audio
+	    //------------------------------------------------------------------------------------
+	    Audio.create();
+	    //------------------------------------------------------------------------------------
+	    
 	    //initialisation
 	    //------------------------------------------------------------------------------------
 	    Input.init();
@@ -96,6 +105,7 @@ public class Main {
 		    }
 		}
 		
+		Audio.destroy();
 		glfwDestroyWindow(windowID);
 		glfwTerminate();
 	}
