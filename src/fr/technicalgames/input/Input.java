@@ -12,22 +12,22 @@ import fr.technicalgames.*;
 import fr.technicalgames.math.*;
 
 public class Input{
-	
+
 	public static GLFWScrollCallback scroll;
 	public static GLFWCursorPosCallback mousePos;
-	
+
 	private static Vector2f mousePosition = new Vector2f();
 	private static Vector2f dMouse = new Vector2f();
 	private static Vector2f previousDMouse = new Vector2f();
-	
+
 	public static final int NONE = 0,PRESSED = 1,RELEASED = 2,REPEATED = 3,UP = 4,DOWN = 5,
 			NBRE_KEY = 0x15D,NBRE_BUTTON = 10,
 			MOUSE_OFFSET = NBRE_KEY + 1,MOUSE_WHEEL_OFFSET = MOUSE_OFFSET + 1;
-	
+
 	private static HashMap<Integer,Integer> state = new HashMap<Integer,Integer>();
-	
+
 	private static double ywheel = 0;
-	
+
 	public static void init(){
 		glfwSetScrollCallback(Main.windowID, scroll = new GLFWScrollCallback() {
 			public void invoke(long window, double xoffset, double yoffset) {
@@ -47,7 +47,7 @@ public class Input{
 		}
 		state.put(MOUSE_WHEEL_OFFSET, NONE);
 	}
-	
+
 	public static void update(){
 		for(Entry<Integer, Integer> set : state.entrySet()){
 			int i = set.getKey();
@@ -91,63 +91,63 @@ public class Input{
 			previousDMouse = dMouse;
 		}
 	}
-	
+
 	public static void destroy(){
-		mousePos.release();
-		scroll.release();
+		mousePos.free();
+		scroll.free();
 	}
-	
+
 	public static void scroll(long window, double xoffset, double yoffset) {
 		ywheel = yoffset;
 	}
-	
+
 	public static void mousepos(long window, double xpos, double ypos) {
 		dMouse.x = (float) (xpos - mousePosition.x);
 		dMouse.y = (float) (ypos - mousePosition.y);
 		mousePosition.x = (float) xpos;
 		mousePosition.y = (float) ypos;
 	}
-	
+
 	public static boolean isButtonDown(int button){
 		return state.get(button + MOUSE_OFFSET) == PRESSED;
 	}
-	
+
 	public static boolean isButtonUp(int button){
 		return state.get(button + MOUSE_OFFSET) == RELEASED;
 	}
-	
+
 	public static boolean isButton(int button){
 		return state.get(button + MOUSE_OFFSET) == PRESSED || state.get(button + MOUSE_OFFSET) == REPEATED;
 	}
-	
+
 	public static int isButtonState(int button){
 		return state.get(button + MOUSE_OFFSET);
 	}
-	
+
 	public static boolean isKeyDown(int key){
 		return state.get(key) == PRESSED;
 	}
-	
+
 	public static boolean isKeyUp(int key){
 		return state.get(key) == RELEASED;
 	}
-	
+
 	public static boolean isKey(int key){
 		return state.get(key) == PRESSED || state.get(key) == REPEATED;
 	}
-	
+
 	public static int isKeyState(int key){
 		return state.get(key);
 	}
-	
+
 	public static int isMouseWheelState(){
 		return state.get(MOUSE_WHEEL_OFFSET);
 	}
-	
+
 	public static boolean isMouseWheelUp(){
 		return state.get(MOUSE_WHEEL_OFFSET) == UP;
 	}
-	
+
 	public static boolean isMouseWheelDown(){
 		return state.get(MOUSE_WHEEL_OFFSET) == DOWN;
 	}
@@ -239,7 +239,7 @@ public class Input{
 	public static int getMouseWheelOffset() {
 		return MOUSE_WHEEL_OFFSET;
 	}
-	
-	
-	
+
+
+
 }

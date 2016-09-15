@@ -16,35 +16,35 @@ import fr.technicalgames.math.*;
 import fr.technicalgames.render.*;
 
 public class Main {
-	
+
 	//Valeur de la fenetre
 	public static final int WIDTH = 800,HEIGHT = 600;
 	public static final String TITLE = "Test Shader OpenGL";
-	
+
 	//Variable pour la gestion de la fenetre
 	public static long windowID = 0;
 	public static float mousePositionX = 0,mousePositionY = 0,dMouseX = 0,dMouseY = 0;
 	public static GLFWErrorCallback errorCallback;
-	
+
 	//variable du moteur du jeu
 	public static float delta = 0;
 	public static Game game;
 	public static long previous = System.currentTimeMillis(),previousInfo = System.currentTimeMillis(),previousTicks = System.currentTimeMillis();
 	public static int FPS = 0,TICKS = 0;
-	
+
 	public static void main(String[] args) throws Exception {
 		//Creation de la fenetre
 		//------------------------------------------------------------------------------------
 		errorCallback = new GLFWErrorCallback() {
 			public void invoke(int error, long description) {
-				System.err.println("ID : " + error + " | Description :" + description);				
+				System.err.println("ID : " + error + " | Description :" + description);
 			}
 		};
 //		glfwSetErrorCallback(errorCallback);
-		
-		if(glfwInit() != GL11.GL_TRUE)throw new Exception("GLFW not init");
+
+		if(glfwInit())throw new Exception("GLFW not init");
 		glfwDefaultWindowHints();
-		glfwWindowHint(GLFW_VISIBLE, GL11.GL_FALSE);	
+		glfwWindowHint(GLFW_VISIBLE, GL11.GL_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GL11.GL_FALSE);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -59,24 +59,24 @@ public class Main {
 	    System.out.println("OpenGL Version :" + glGetString(GL_VERSION));
 	    System.out.println("GLSL Shader Version :" + glGetString(GL20.GL_SHADING_LANGUAGE_VERSION));
 	    //------------------------------------------------------------------------------------
-		
+
 	    //Creation du device audio
 	    //------------------------------------------------------------------------------------
 	    Audio.create();
 	    //------------------------------------------------------------------------------------
-	    
+
 	    //initialisation
 	    //------------------------------------------------------------------------------------
 	    Input.init();
 	    game = new MainGame();
-	    
+
 	    Camera.rot = new Vector3f(-3.0f,-338.0f,0.0f);
 	    Camera.pos = new Vector3f(1.5242399f,0.0f,-13.456063f);
 	    Camera.transform();
 	    //------------------------------------------------------------------------------------
-		
-		while(glfwWindowShouldClose(windowID) == GL11.GL_FALSE){
-		    
+
+		while(glfwWindowShouldClose(windowID)){
+
 		    if(System.currentTimeMillis() - previousTicks >= 1000/60){//Update TICKS
 			    glfwPollEvents();
 			    Input.update();
@@ -96,7 +96,7 @@ public class Main {
 				glfwSwapBuffers(windowID);
 				FPS++;
 		    }
-		    
+
 		    if(System.currentTimeMillis() - previousInfo >= 1000){
 		    	glfwSetWindowTitle(windowID, TITLE + " | FPS:" + FPS + " TICKS:" + TICKS);
 		    	FPS = 0;
@@ -104,10 +104,10 @@ public class Main {
 		    	previousInfo = System.currentTimeMillis();
 		    }
 		}
-		
+
 		Audio.destroy();
 		glfwDestroyWindow(windowID);
 		glfwTerminate();
 	}
-	
+
 }

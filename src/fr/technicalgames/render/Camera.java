@@ -18,10 +18,10 @@ public class Camera {
 	public static float speed = 1.0f;
 
 
-	
+
 	public static Vector3f rot = new Vector3f();
 	public static Vector3f pos = new Vector3f();
-	
+
 	public static void update(){
 		speed = SPEED * Main.delta;
 		if(Input.isKey(GLFW_KEY_LEFT_CONTROL))speed *= 2.0f;
@@ -51,11 +51,11 @@ public class Camera {
 		if(Input.isKey(GLFW.GLFW_KEY_SPACE)){
 			pos.y += speed;
 		}
-		if(Input.isKeyDown(GLFW_KEY_ESCAPE))glfwSetWindowShouldClose(Main.windowID, GL11.GL_TRUE);
+		if(Input.isKeyDown(GLFW_KEY_ESCAPE))glfwSetWindowShouldClose(Main.windowID, true);
 		if(Input.isButtonDown(0))glfwSetInputMode(Main.windowID, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		if(Input.isButtonDown(1))glfwSetInputMode(Main.windowID, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	}
-	
+
 	public static void transform(){
 		matrix.loadIdentity();
 		matrix.rotate(new Quaternion(new Vector3f(1,0,0),rot.x));
@@ -63,5 +63,5 @@ public class Camera {
 		matrix.rotate(new Quaternion(new Vector3f(0,0,1),rot.z));
 		matrix.tranlate(-pos.x, -pos.y, -pos.z);
 	}
-	
+
 }
