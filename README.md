@@ -1,4 +1,4 @@
-# First-Game-Lighting
+# Java-Game-Engine-Light-Test
 
 Compile status: ![Status](https://travis-ci.org/mrdev023/First-Game-Lighting.svg?branch=master)
 
